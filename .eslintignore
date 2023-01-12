@@ -1,0 +1,11 @@
+node_modules
+public
+build
+dist
+src/__tests__/**
+
+*.svg
+*.png
+*.otf
+*.gql
+*.css
