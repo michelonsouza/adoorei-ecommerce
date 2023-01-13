@@ -3181,6 +3181,11 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+phosphor-vue@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/phosphor-vue/-/phosphor-vue-1.4.2.tgz#84c24521fb42b59ecb9d68295c92c0de41a9c21b"
+  integrity sha512-RFbJplmCZ7E/sv+xKmxOpIJ08ZZufL4lVx8t2a5St4juRZtW7XC8szSQ32qJUHBlBtjr6nS8lDiu/CJuhEOjIg==
+
 picocolors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
