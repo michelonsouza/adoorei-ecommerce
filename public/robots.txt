@@ -1,0 +1,7 @@
+User-agent: Twitterbot
+Disallow:
+
+User-agent: *
+Allow: /
+
+Sitemap: https://adoorei-ecommerce.netlify.app/sitemap.xml
