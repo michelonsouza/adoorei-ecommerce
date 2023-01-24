@@ -1,34 +1,32 @@
 <template>
   <div>
-    <router-link to="/">HomePage</router-link>
-    <router-link to="/test">TestPage</router-link>
-    <!-- <a href="https://vitejs.dev" target="_blank" aria-label="vite logo">
-      <img id="logo" src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a> -->
+    <app-layout>
+      <router-view v-slot="{ Component, route }">
+        <transition name="page-slide" mode="out-in">
+          <div :key="route.path">
+            <component :is="Component" />
+          </div>
+        </transition>
+      </router-view>
+    </app-layout>
   </div>
-  <HelloWorld msg="Vite + Vue" />
-  <router-view></router-view>
 </template>
 
 <script setup lang="ts">
-import { RouterView, RouterLink } from 'vue-router';
+import { RouterView } from 'vue-router';
 
-import HelloWorld from './components/HelloWorld.vue';
+import { AppLayout } from '@/layouts';
 </script>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+.page-slide-enter-active,
+.page-slide-leave-active {
+  transition: 300ms ease all;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.page-slide-enter-from,
+.page-slide-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
 }
 </style>
