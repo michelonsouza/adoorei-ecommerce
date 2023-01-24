@@ -15,6 +15,10 @@ const initialCartValue: Cart = {
   __v: 0,
 };
 
+function persistCart(cart: Cart): void {
+  encryptStorage.setItem(STORE_STORAGE_KEY, cart);
+}
+
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<Cart>(
     encryptStorage.getItem<Cart>(STORE_STORAGE_KEY) || initialCartValue,
@@ -46,7 +50,7 @@ export const useCartStore = defineStore('cart', () => {
     });
     const internCart: Cart = { ...cart.value, products: newCartProducts };
     cart.value = internCart;
-    encryptStorage.setItem(STORE_STORAGE_KEY, internCart);
+    persistCart(internCart);
   }
 
   function subProduct(product: CartProduct): void {
@@ -75,8 +79,24 @@ export const useCartStore = defineStore('cart', () => {
       .filter(cartProduct => !!cartProduct.quantity);
     const internCart: Cart = { ...cart.value, products: newCartProducts };
     cart.value = internCart;
-    encryptStorage.setItem(STORE_STORAGE_KEY, internCart);
+    persistCart(internCart);
   }
 
-  return { cart, addProduct, subProduct, quantity };
+  function removeProduct(product: CartProduct): void {
+    let cartProducts = cloneDeep(cart.value.products);
+    cartProducts = cartProducts.filter(
+      cartProduct => cartProduct.productId !== product.productId,
+    );
+
+    const internCart: Cart = { ...cart.value, products: cartProducts };
+    cart.value = internCart;
+    persistCart(internCart);
+  }
+
+  function resetCart() {
+    persistCart(initialCartValue);
+    cart.value = initialCartValue;
+  }
+
+  return { cart, addProduct, subProduct, quantity, removeProduct, resetCart };
 });
