@@ -11,3 +11,4 @@ src/__tests__/**
 *.otf
 *.gql
 *.css
+*.md
