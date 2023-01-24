@@ -1,12 +1,13 @@
 <template>
   <hero-banner />
   <product-list :products="store.filteredProducts" />
+  <loading-overlay v-if="!store.quantity" />
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { HeroBanner, ProductList } from '@/components';
+import { HeroBanner, ProductList, LoadingOverlay } from '@/components';
 import { getProducts } from '@/services';
 import { useProductStore } from '@/store';
 
