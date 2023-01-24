@@ -28,7 +28,7 @@
               !store.quantity,
           }"
           :disabled="!store.quantity"
-          @click="handleOpenMenu"
+          @click="handleGoToCart"
         >
           <shopping-cart-icon class="h-6 w-6" />
           <span
@@ -84,6 +84,10 @@ function handleOpenMenu() {
 
 function handleGoToHome() {
   router.push('/');
+}
+
+function handleGoToCart() {
+  router.push('/cart');
 }
 </script>
 
