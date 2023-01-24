@@ -6,6 +6,8 @@ src/__tests__/**
 
 *.svg
 *.png
+*.jpeg
+*.jpg
 *.otf
 *.gql
 *.css
