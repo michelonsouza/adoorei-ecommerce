@@ -1,10 +1,14 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
-import { HomePage, TestPage } from './pages';
+import { HomePage } from './pages';
+
+const ProductPage = () => import('./pages/ProductPage.vue');
+const CategoryProductPage = () => import('./pages/CategoryProductPage.vue');
 
 const routes: Readonly<RouteRecordRaw[]> = [
   { path: '/', component: HomePage },
-  { path: '/test', component: TestPage },
+  { path: '/:category/products', component: CategoryProductPage },
+  { path: '/product/:id', component: ProductPage },
 ];
 
 export const router = createRouter({
