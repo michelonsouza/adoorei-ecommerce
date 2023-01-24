@@ -21,6 +21,7 @@
     "encrypt-storage": "^2.12.14",
     "lodash": "^4.17.21",
     "pinia": "^2.0.28",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.45",
     "vue-router": "4",
     "yup": "^0.32.11"
