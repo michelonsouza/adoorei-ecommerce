@@ -24,7 +24,7 @@
           <div class="flex items-center">
             <button
               :disabled="productQuantity === 1"
-              class="w-6 h-6 rounded bg-primary text-white flex justify-center items-center"
+              class="w-10 h-10 sm:w-6 sm:h-6 rounded bg-primary text-white flex justify-center items-center"
               :class="[
                 productQuantity === 1
                   ? 'bg-gray-300 dark:bg-gray-500'
@@ -36,18 +36,18 @@
             </button>
             <input
               readonly
-              class="rounded bg-transparent w-10 border text-center h-6"
+              class="rounded bg-transparent w-14 sm:w-10 border text-center h-10 sm:h-6"
               :value="productQuantity"
             />
             <button
-              class="w-6 h-6 rounded bg-primary text-white flex justify-center items-center"
+              class="w-10 h-10 sm:w-6 sm:h-6 rounded bg-primary text-white flex justify-center items-center"
               @click="handleAddQuantity"
             >
               +
             </button>
           </div>
           <button
-            class="bg-accent dark:bg-accent-dark text-white h-6 px-2 rounded"
+            class="bg-accent dark:bg-accent-dark text-white h-10 sm:h-6 px-2 rounded"
             @click="handleAddToCart"
           >
             Add to cart
