@@ -3,7 +3,9 @@ import { ApiFilters, Product } from '@/models';
 
 import { baseService } from './base';
 
-export async function getProducts(params: ApiFilters): Promise<Product[]> {
+export async function getProducts(
+  params: ApiFilters = {} satisfies ApiFilters,
+): Promise<Product[]> {
   const { data: result } = await baseService.get<Product[]>('/products', {
     params,
   });
