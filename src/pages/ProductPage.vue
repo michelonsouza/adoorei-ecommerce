@@ -27,29 +27,35 @@
       </div>
       <div class="flex items-center justify-between mt-3 w-full">
         <p class="font-semibold text-2xl">{{ price }}</p>
-        <div class="flex items-center mt-2">
+        <div class="flex items-center gap-4 mt-2">
+          <div class="flex items-center">
+            <button
+              :disabled="quantity === 1"
+              class="w-10 h-10 sm:w-8 sm:h-8 rounded bg-primary text-white flex justify-center items-center"
+              :class="[
+                quantity === 1 ? 'bg-gray-300 dark:bg-gray-500' : 'bg-primary',
+              ]"
+              @click="quantity -= 1"
+            >
+              -
+            </button>
+            <input
+              readonly
+              class="rounded bg-transparent w-16 sm:w-12 h-10 sm:h-8 border text-center"
+              :value="quantity"
+            />
+            <button
+              class="w-10 h-10 sm:w-8 sm:h-8 rounded bg-primary text-white flex justify-center items-center"
+              @click="quantity += 1"
+            >
+              +
+            </button>
+          </div>
           <button
-            :disabled="!cartProduct?.quantity"
-            class="w-10 h-10 sm:w-8 sm:h-8 rounded bg-primary text-white flex justify-center items-center"
-            :class="[
-              !cartProduct?.quantity
-                ? 'bg-gray-300 dark:bg-gray-500'
-                : 'bg-primary',
-            ]"
-            @click="handleSubFromCart"
-          >
-            -
-          </button>
-          <input
-            readonly
-            class="rounded bg-transparent w-16 sm:w-12 h-10 sm:h-8 border text-center"
-            :value="cartProductQuantity"
-          />
-          <button
-            class="w-10 h-10 sm:w-8 sm:h-8 rounded bg-primary text-white flex justify-center items-center"
+            class="bg-accent sm:h-8 dark:bg-accent-dark text-white h-10 px-2 rounded"
             @click="handleAddToCart"
           >
-            +
+            Add to cart
           </button>
         </div>
       </div>
@@ -58,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import { StarIcon, UserIcon } from '@heroicons/vue/24/solid';
 import { useRoute } from 'vue-router';
@@ -71,6 +77,8 @@ const route = useRoute();
 const productStore = useProductStore();
 const cartStore = useCartStore();
 
+const quantity = ref<number>(1);
+
 const price = computed<string>(() =>
   formatToMonetary(product.value?.price || 0),
 );
@@ -81,34 +89,16 @@ const product = computed(() => {
   );
 });
 
-const cartProduct = computed(() => {
-  return cartStore.cart.products.find(
-    productCart => productCart.productId === Number(route.params.id),
-  );
-});
-
-const cartProductQuantity = computed(() => cartProduct.value?.quantity || 0);
-
 function handleAddToCart(event: MouseEvent) {
   event.stopPropagation();
 
   const addCartProduct: CartProduct = {
-    quantity: 1,
+    quantity: quantity.value,
     productId: Number(route.params.id),
   };
 
   cartStore.addProduct(addCartProduct);
-}
-
-function handleSubFromCart(event: MouseEvent) {
-  event.stopPropagation();
-
-  const addCartProduct: CartProduct = {
-    quantity: 1,
-    productId: Number(route.params.id),
-  };
-
-  cartStore.subProduct(addCartProduct);
+  quantity.value = 1;
 }
 </script>
 
